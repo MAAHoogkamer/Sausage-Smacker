@@ -1,0 +1,291 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>SausageSmacker</title>
+<!-- Javascript Code: -->
+<script type="text/javascript">
+window.onload = function(){
+  addNumHit();
+  addTimerA();
+}
+<!-- Move head: -->
+let nHit=0;
+let timerZ= 1000;
+let tim;
+let moveMmm;
+let gameTime;
+let xyx = 30000;
+function moveMm() {
+    let field = ["a1","a2","a3","a4","a5","a6","b1","b2","b3","b4","b5","b6","c1","c2","c3","c4","c5","c6","d1","d2","d3","d4","d5","d6"];
+    let random = Math.floor(Math.random() * field.length);
+    moveMmm = field[random];
+    document.getElementsByClassName("head")[0].setAttribute("id", moveMmm);
+    clearTimeout(tim);
+    setTimerz();
+  }
+function setTimerz(){
+  tim = window.setTimeout(moveMm, timerZ);
+}
+<!-- Timers: -->
+function addTimerA(){
+  document.getElementById("addTimerId").textContent = (xyx / 100);
+}
+function addTimer() {
+  xyx -=100;
+  addTimerA();
+  window.setTimeout(addTimer, 100);
+}
+function addNumHit() {
+  document.getElementsByClassName("numHitId")[0].textContent = nHit;
+}
+<!-- Animate head and sausage on smack: -->
+function headBack(){
+  document.getElementsByClassName("head")[0].src = "head.png";
+}
+function sausageBack(){
+  document.getElementsByClassName("conbox")[0].style.cursor = "url('sausagea.png'), auto";
+}
+function clickZ(){
+  document.getElementsByClassName("conbox")[0].style.cursor = "url('sausageb.png'), auto";
+  window.setTimeout(sausageBack, 111);
+  document.getElementsByClassName("head")[0].src = "heada.png";
+  window.setTimeout(headBack, 222);
+  nHit++;
+  timerZ -=22;
+  addNumHit();
+  moveMm();
+}
+function startGame() {
+  moveMm();
+  document.getElementById("startButt").style.display = "none";
+  document.getElementById("resetButt").style.display = "block";
+  gameTime = window.setTimeout(endGame, 30000);
+  addTimer();
+}
+function endGame(){
+  document.getElementById("endGameId").style.display = "block";
+  document.getElementsByClassName("numHitId")[1].textContent = nHit;
+}
+function startGameA(){
+  nHit=0;
+  timerZ= 1000;
+  xyx = 30000;
+  addNumHit();
+  document.getElementById("endGameId").style.display = "none";
+  window.setTimeout(endGame, 30000);
+}
+</script>
+</head>
+<!-- HTML Code: -->
+<body>
+  <div class="container">
+      <div class="conbox" id="mainGameId">
+        <div class="gameTitle">SausageSmacker</div>
+        <div class="nrHits">
+          Hits:<br>
+          <span class="numHitId"></span>
+        </div>
+        <div class="controlM">
+          <button id="startButt" class="menuButt" onClick="startGame()">Start</button>
+          <button id="resetButt" class="menuButt" onClick="endGame()">Reset</button>
+          Time left:<br>
+          <span id="addTimerId"></span> deciseconds.
+        </div>
+        <div class="gameGrid">
+        <div id="a1" class="zGrid"></div><div id="a2" class="zGrid"></div><div id="a3" class="zGrid"></div><div id="a4" class="zGrid"></div><div id="a5" class="zGrid"></div><div id="a6" class="zGrid"></div>
+        <div id="b1" class="zGrid"></div><div id="b2" class="zGrid"></div><div id="b3" class="zGrid"></div><div id="b4" class="zGrid"></div><div id="b5" class="zGrid"></div><div id="b6" class="zGrid"></div>
+        <div id="c1" class="zGrid"></div><div id="c2" class="zGrid"></div><div id="c3" class="zGrid"></div><div id="c4" class="zGrid"></div><div id="c5" class="zGrid"></div><div id="c6" class="zGrid"></div>
+        <div id="d1" class="zGrid"></div><div id="d2" class="zGrid"></div><div id="d3" class="zGrid"></div><div id="d4" class="zGrid"></div><div id="d5" class="zGrid"></div><div id="d6" class="zGrid"></div>
+        <img class="head" id="headId" src="head.png" onClick="clickZ()" width="100" height="100"/>
+    </div></div>
+      <div class="conbox" id="endGameId">
+        <div class="gameGrid">
+          <div id="endGameMenu">
+          You have successfully smacked <p class="numHitId"></p> times!<br><br>
+        <button onClick="startGameA()">Play again</button>
+      </div>
+      </div>
+    </div>
+  </div>
+<!-- CSS Code: -->
+<style>
+.head:hover {
+  content: url(headb.png);
+}
+.container {
+  font-family: arial;
+  font-size: 24px;
+  width: 100%;
+  height: 100%;
+  outline: dotted 1px black;
+  position: relative;
+}
+.conbox {
+  text-align: center;
+  width: 620px;
+  height: 600px;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  margin: -25px 0 0 -25px;
+  border-radius: 2%;
+  background-color: grey;
+  cursor: url('sausagea.png'), auto;
+}
+.gameGrid {
+  display: grid;
+  grid-template-columns: 100px 100px 100px 100px 100px 100px;
+  grid-template-rows: 100px 100px 100px 100px;
+  grid-template-areas:
+  "a1 a2 a3 a4 a5 a6"
+  "b1 b2 b3 b4 b5 b6"
+  "c1 c2 c3 c4 c5 c6"
+  "d1 d2 d3 d4 d5 d6";
+  grid-gap: 1px;
+  width: 600px;
+  height: 400px;
+  position: absolute;
+  top: 100px;
+  left: 7.5px;
+  z-index: 1;
+}
+.zGrid {
+  background-image: linear-gradient(to right, lightgrey , white);
+}
+#headId {
+  display: none;
+}
+#mainGameId {
+}
+#endGameId {
+  z-index: 2;
+  display: none;
+}
+.menuButt{
+  position: absolute;
+  top: 0px;
+  left:  300px;
+  width: 66;
+  height: 33;
+}
+#resetButt {
+  display: none;
+}
+.nrHits {
+	position:absolute;
+	z-index: 1;
+	margin: auto;
+  font-size: 0.8em;
+	color: black;
+	top: 30px;
+  right: 0px;
+	width: 33%;
+	height: 33%;
+}
+.controlM {
+	position:absolute;
+	z-index: 1;
+	margin: auto;
+  font-size: 0.8em;
+	color: black;
+	top: 30px;
+  left: 0px;
+	width: 50%;
+	height: 33%;
+}
+.gameTitle {
+	position:absolute;
+	z-index: 6;
+	margin: auto;
+  font-size: 2em;
+  font-style: italic;
+	color: black;
+	bottom: 25px;
+  text-shadow: 2px 2px red;
+  text-align: center;
+  left: 125px;
+}
+#endGameMenu {
+  width: 350px;
+  height: 350px;
+  position: absolute;
+  top: 25%;
+  left: 25%;
+  margin: -25px 0 0 -25px;
+  border-radius: 2%;
+}
+#a1 {
+  grid-area: a1;
+}
+#a2 {
+  grid-area: a2;
+}
+#a3 {
+  grid-area: a3;
+}
+#a4 {
+  grid-area: a4;
+}
+#a5 {
+  grid-area: a5;
+}
+#a6 {
+  grid-area: a6;
+}
+#b1 {
+  grid-area: b1;
+}
+#b2 {
+  grid-area: b2;
+}
+#b3 {
+  grid-area: b3;
+}
+#b4 {
+  grid-area: b4;
+}
+#b5 {
+  grid-area: b5;
+}
+#b6 {
+  grid-area: b6;
+}
+#c1 {
+  grid-area: c1;
+}
+#c2 {
+  grid-area: c2;
+}
+#c3 {
+  grid-area: c3;
+}
+#c4 {
+  grid-area: c4;
+}
+#c5 {
+  grid-area: c5;
+}
+#c6 {
+  grid-area: c6;
+}
+#d1 {
+  grid-area: d1;
+}
+#d2 {
+  grid-area: d2;
+}
+#d3 {
+  grid-area: d3;
+}
+#d4 {
+  grid-area: d4;
+}
+#d5 {
+  grid-area: d5;
+}
+#d6 {
+  grid-area: d6;
+}
+</style>
+</body>
+</html>
